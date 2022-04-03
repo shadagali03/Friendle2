@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendle</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <div class="game-container">
+        <div class="title-container">
+            <h1>Welcome to Friendle</h1>
+            <p>
+                Challenge your friends with your own custom words!
+            </p>
+        </div>
+        <div class="createGame">
+            <div class="gameTitle">
+                <h2>
+                    <center>Create Your Own Game</center>
+                </h2>
+            </div>
+            <center>
+                <input type="radio" id="existingWord" name='userChoice' value='existingWord'>
+                <label for="existingWord">Existing Word</label>
+
+                <input type="radio" id="customWord" name='userChoice' value='customWord'>
+                <label for="existingWord">Custom Word</label><br><br>
+
+                <label for='inputWord'>Enter Your Word</label>
+                <input type='text' id='inputWord'><br><br>
+
+                <input id="submit" type="submit" value="Submit">
+                <a id="url" target="_blank" href=""></a>
+            </center>
+        </div>
+
+    </div>
+
+    <script src="./index.js" type="module"></script>
+</body>
+
+</html>
