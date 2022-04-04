@@ -25,7 +25,6 @@ app.get("/paths/:path", async (req, res) => {
     try {
         // res.sendfile(path.join(path.resolve(), './public/opponent.html'));
         let htmlFile = await fs.readFile('./public/opponent.html', 'utf8')
-        console.log(req.params.path, paths.get(req.params.path))
         htmlFile = htmlFile.replace("$$REPLACEANSWER$$", paths.get(req.params.path))
         res.send(htmlFile)
     }

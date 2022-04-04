@@ -128,6 +128,12 @@
         keys.push.apply(keys, "ZXCVBNM".split(''))
         keys.push("<<")
 
+        document.addEventListener('keydown', (e) => {
+            if ((e.key.length == 1 && e.key.match(/[a-z]/i)) || e.key == "Enter" || e.key == "Backspace") {
+                handleClick(e.key.toUpperCase())
+            }
+        });
+
         const createGuessRows = (friendleAnswer) => {
             let outerArray = []
             for (let i = 0; i < 6; i++) {
@@ -166,12 +172,12 @@
         })
 
         const handleClick = (key) => {
-            if (key === '<<' && !isGameOver) {
+            if ((key === '<<' || key.toUpperCase() === "BACKSPACE") && !isGameOver) {
                 deleteLetter()
                 return
             }
 
-            if (key === 'ENTER' && !isGameOver) {
+            if (key.toUpperCase() === 'ENTER' && !isGameOver) {
                 checkRow()
                 return
             }
@@ -180,10 +186,12 @@
 
         const addLetter = (letter) => {
             const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
-            tile.textContent = letter
-            tile.setAttribute('data', letter)
-            guessRows[currentRow][currentTile] = letter
-            currentTile++
+            if (tile) {
+                tile.textContent = letter
+                tile.setAttribute('data', letter)
+                guessRows[currentRow][currentTile] = letter
+                currentTile++
+            }
         }
 
         const deleteLetter = () => {
