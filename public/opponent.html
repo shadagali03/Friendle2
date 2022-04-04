@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friendle</title>
-    <!-- <link rel="stylesheet" href="opponent.css"> -->
-    <!-- <script src="./index.js" type="module"></script> -->
-    <!-- <script type="text/javascript" src="./index.js"></script> -->
+
     <style>
         * {
             color: #181515;
@@ -130,14 +128,19 @@
         keys.push.apply(keys, "ZXCVBNM".split(''))
         keys.push("<<")
 
-        const guessRows = [
-            ['', '', '', '', '', ''],
-            ['', '', '', '', '', ''],
-            ['', '', '', '', '', ''],
-            ['', '', '', '', '', ''],
-            ['', '', '', '', '', ''],
-            ['', '', '', '', '', '']
-        ]
+        const createGuessRows = (friendleAnswer) => {
+            let outerArray = []
+            for (let i = 0; i < 6; i++) {
+               let innerArray = [] 
+                for (let j = 0; j < friendleAnswer.length; j++) {
+                    innerArray.push('')
+                }
+                outerArray.push(innerArray)
+            }
+            return outerArray
+        }
+
+        const guessRows = createGuessRows(answer)
 
         let currentRow = 0
         let currentTile = 0
