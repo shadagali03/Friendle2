@@ -121,7 +121,7 @@
             const messageDisplay = document.querySelector('.message-container')
 
             // answer that will be replaced by backend
-            const answer = "$$REPLACEANSWER$$"
+            const answer = "$$REPLACEANSWER$$".toUpperCase()
 
             // Generate List for keys
             var keyString = "QWERTYUIOPASDFGHJKL"
@@ -306,9 +306,9 @@
                 var yellowSqaure = String.fromCodePoint(0x1F7E8)
                 var blackSqaure = String.fromCodePoint(0x1F7E7)
 
-                let resultText = 'Congratulations you guessed the word!!!\n\nFriendle: ' + answer + ' ' + answerRow + '/6\n\n'
+                let resultText = 'Congratulations you guessed the word!!!\n\nFriendle: ' + answerRow + '/6\n\n'
                 if (currentRow == guessRows.length && guessRows[5] != answer) {
-                    resultText = 'Whoops you missed the word!\n\nFriendle: ' + answer + ' X/6\n\n'
+                    resultText = 'Whoops you missed the word!\n\nFriendle: X/6\n\n'
                 }
 
                 for (let i = 0; i < answerRow; i++) {
@@ -326,10 +326,7 @@
                     }
                     resultText += '\n'
                 }
-                //navigator.clipboard.writeText(resultText).then(() => alert(resultText + '\nScore copied to clipboard!'))
-                console.log(resultText)
-                navigator.clipboard.writeText(resultText)
-                alert(resultText + '\nScore copied to clipboard!')
+                navigator.clipboard.writeText(resultText).then(() => alert(resultText + '\nScore copied to clipboard!'))
                 return
             }
         </script>

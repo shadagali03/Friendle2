@@ -4,7 +4,6 @@
   }
 
 .game-container {
-    height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,7 +12,7 @@
 
 .createGame {
     background-color: rgb(34, 172, 236);
-    justify-content: flex-start;
+    justify-content: center;
     height: 300px;
     width: 400px;
 }
