@@ -211,42 +211,52 @@
             console.log(guessRows[0].length - 1)
             if (currentTile > guessRows[0].length - 1) {
                 const guess = guessRows[currentRow].join('')
-
-                let inWB = inWordBank()
-                if (!inWB) {
-                    for (let i = guessRows[0].length; i > 0; i--) {
-                        currentTile--
-                        const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
-                        tile.textContent = ''
-                        guessRows[currentRow][currentTile] = ''
-                        tile.setAttribute('data', '')
-                        //console.log('It is false')
-                    }
-                    return
-                }
-                flipTile()
-                if (answer == guess) {
-                    console.log('Made it to loop')
-                    showMessage("Congratulations!")
-                    console.log("DO you work")
-                    isGameOver = true
-                    copyToClipBoard()
-                    return
-                } else {
-                    if (currentRow >= guessRows[0].length) {
-                        console.log(currentRow)
-                        showMessage("Game Over")
-                        isGameOver = true
-                        copyToClipBoard()
+                if (currentTile > guessRows[0].length - 1) {
+                
+                fetch(`http://localhost:3000/check/?word=${guess}`)
+                    .then(response => response.json())
+                    .then(json => {
+                    if (json == 'Entry word not found') {
+                        showMessage('word not in list')
+                        let inWB = inWordBank()
+                        if (!inWB) {
+                            for (let i = guessRows[0].length; i > 0; i--) {
+                                currentTile--
+                                const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
+                                tile.textContent = ''
+                                guessRows[currentRow][currentTile] = ''
+                                tile.setAttribute('data', '')
+                            }
+                            return
+                        }
                         return
-                    }
+                    } else {
+                        flipTile()
+                        if (answer == guess) {
+                            console.log('Made it to loop')
+                            showMessage("Congratulations!")
+                            console.log("DO you work")
+                            isGameOver = true
+                            copyToClipBoard()
+                            return
+                        } else {
+                            if (currentRow >= guessRows[0].length) {
+                                console.log(currentRow)
+                                showMessage("Game Over")
+                                isGameOver = true
+                                copyToClipBoard()
+                                return
+                            }
 
-                    if (currentRow < guessRows[0].length) {
-                        currentRow++
-                        currentTile = 0
+                            if (currentRow < guessRows[0].length) {
+                                currentRow++
+                                currentTile = 0
+                            }
+                        } 
                     }
-                }
+                }).catch(err => console.log(err))
             }
+        }
         }
 
         const showMessage = (message) => {
