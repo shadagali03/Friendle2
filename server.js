@@ -43,14 +43,13 @@ app.get('/check', (req, res) => {
     const options = {
         method: 'GET',
         url: 'https://twinword-word-graph-dictionary.p.rapidapi.com/theme/',
-        params: {entry: word},
+        params: { entry: word },
         headers: {
-          'X-RapidAPI-Host': 'twinword-word-graph-dictionary.p.rapidapi.com',
-          'X-RapidAPI-Key': '4335776fa6mshe20dea79d67d1d6p1f5c44jsn153f087d1e68'
+            'X-RapidAPI-Host': 'twinword-word-graph-dictionary.p.rapidapi.com',
+            'X-RapidAPI-Key': '4335776fa6mshe20dea79d67d1d6p1f5c44jsn153f087d1e68'
         }
-      };
+    };
 
-    console.log('Test')
     axios.request(options).then((response) => {
         console.log(response.data.result_msg)
         res.json(response.data.result_msg)

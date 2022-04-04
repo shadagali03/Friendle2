@@ -131,7 +131,7 @@
         const createGuessRows = (friendleAnswer) => {
             let outerArray = []
             for (let i = 0; i < 6; i++) {
-               let innerArray = [] 
+                let innerArray = []
                 for (let j = 0; j < friendleAnswer.length; j++) {
                     innerArray.push('')
                 }
@@ -212,51 +212,49 @@
             if (currentTile > guessRows[0].length - 1) {
                 const guess = guessRows[currentRow].join('')
                 if (currentTile > guessRows[0].length - 1) {
-                
-                fetch(`http://localhost:3000/check/?word=${guess}`)
-                    .then(response => response.json())
-                    .then(json => {
-                    if (json == 'Entry word not found') {
-                        showMessage('word not in list')
-                        let inWB = inWordBank()
-                        if (!inWB) {
-                            for (let i = guessRows[0].length; i > 0; i--) {
-                                currentTile--
-                                const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
-                                tile.textContent = ''
-                                guessRows[currentRow][currentTile] = ''
-                                tile.setAttribute('data', '')
-                            }
-                            return
-                        }
-                        return
-                    } else {
-                        flipTile()
-                        if (answer == guess) {
-                            console.log('Made it to loop')
-                            showMessage("Congratulations!")
-                            console.log("DO you work")
-                            isGameOver = true
-                            copyToClipBoard()
-                            return
-                        } else {
-                            if (currentRow >= guessRows[0].length) {
-                                console.log(currentRow)
-                                showMessage("Game Over")
-                                isGameOver = true
-                                copyToClipBoard()
-                                return
-                            }
 
-                            if (currentRow < guessRows[0].length) {
-                                currentRow++
-                                currentTile = 0
+                    fetch(`http://localhost:3000/check/?word=${guess}`)
+                        .then(response => response.json())
+                        .then(json => {
+                            if (json == 'Entry word not found') {
+                                showMessage('word not in list')
+                                let inWB = inWordBank()
+                                if (!inWB) {
+                                    for (let i = guessRows[0].length; i > 0; i--) {
+                                        currentTile--
+                                        const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
+                                        tile.textContent = ''
+                                        guessRows[currentRow][currentTile] = ''
+                                        tile.setAttribute('data', '')
+                                    }
+                                    return
+                                }
+                                return
+                            } else {
+                                flipTile()
+                                if (answer == guess) {
+                                    showMessage("Congratulations!")
+                                    isGameOver = true
+                                    copyToClipBoard()
+                                    return
+                                } else {
+                                    if (currentRow >= guessRows[0].length) {
+                                        console.log(currentRow)
+                                        showMessage("Game Over")
+                                        isGameOver = true
+                                        copyToClipBoard()
+                                        return
+                                    }
+
+                                    if (currentRow < guessRows[0].length) {
+                                        currentRow++
+                                        currentTile = 0
+                                    }
+                                }
                             }
-                        } 
-                    }
-                }).catch(err => console.log(err))
+                        }).catch(err => console.log(err))
+                }
             }
-        }
         }
 
         const showMessage = (message) => {
@@ -291,7 +289,6 @@
             })
 
             rowTiles.forEach((tile, index) => {
-                console.log('At last part')
                 tile.classList.add(guess[index].color)
                 addColorToKey(guess[index].letter, guess[index].color)
             })
@@ -328,9 +325,7 @@
                 }
                 resultText += '\n'
             }
-            navigator.clipboard.writeText(resultText)
-            alert(resultText + '\nScore copied to clipboard!')
-            console.log(resultText)
+            navigator.clipboard.writeText(resultText).then(() => alert(resultText + '\nScore copied to clipboard!'))
             return
         }
     </script>
