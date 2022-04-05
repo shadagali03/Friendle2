@@ -122,6 +122,9 @@
 
             // answer that will be replaced by backend
             const answer = "$$REPLACEANSWER$$".toUpperCase()
+            //const customWord = (new URLSearchParams(window.location.search)).customWord
+            const queryString = new URLSearchParams(window.location.search)
+            customWord = JSON.parse(queryString.get('customWord'))
 
             // Generate List for keys
             var keyString = "QWERTYUIOPASDFGHJKL"
@@ -214,46 +217,45 @@
             }
 
             // Checks to see if word is valid
-            const checkRow = () => {
+            const checkRow = async () => {
                 if (currentTile > guessRows[0].length - 1) {
                     const guess = guessRows[currentRow].join('')
                     if (currentTile > guessRows[0].length - 1) {
-                        fetch(`http://localhost:3000/check/?word=${guess}`)
-                            .then(response => response.json())
-                            .then(json => {
-                                if (json == 'Entry word not found') {
-                                    showMessage('word not in list')
-                                        for (let i = guessRows[0].length; i > 0; i--) {
-                                            currentTile--
-                                            const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
-                                            tile.textContent = ''
-                                            guessRows[currentRow][currentTile] = ''
-                                            tile.setAttribute('data', '')
-                                        }
-                                        return
-                                } else {
-                                    flipTile()
-                                    if (answer == guess) {
-                                        showMessage("Congratulations!")
-                                        isGameOver = true
-                                        copyToClipBoard()
-                                        return
-                                    } else {
-                                        if (currentRow >= guessRows[0].length) {
-                                            console.log(currentRow)
-                                            showMessage("Game Over")
-                                            isGameOver = true
-                                            copyToClipBoard()
-                                            return
-                                        }
-
-                                        if (currentRow < guessRows[0].length) {
-                                            currentRow++
-                                            currentTile = 0
-                                        }
-                                    }
+                        if (!customWord) {
+                            const json = await (await fetch(`http://localhost:3000/check/?word=${guess}`)).json()
+                            if (json == 'Entry word not found') {
+                                showMessage('word not in list')
+                                for (let i = guessRows[0].length; i > 0; i--) {
+                                    currentTile--
+                                    const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
+                                    tile.textContent = ''
+                                    guessRows[currentRow][currentTile] = ''
+                                    tile.setAttribute('data', '')
                                 }
-                            }).catch(err => console.log(err))
+                                return
+                            }
+                        } 
+                        //console.log('entered')
+                            flipTile()
+                            if (answer == guess) {
+                                showMessage("Congratulations!")
+                                isGameOver = true
+                                copyToClipBoard()
+                                return
+                            } else {
+                                if (currentRow >= guessRows[0].length) {
+                                    console.log(currentRow)
+                                    showMessage("Game Over")
+                                    isGameOver = true
+                                    copyToClipBoard()
+                                    return
+                                }
+
+                                if (currentRow < guessRows[0].length) {
+                                    currentRow++
+                                    currentTile = 0
+                                }
+                        }
                     }
                 }
             }
@@ -274,6 +276,8 @@
                 rowTiles.forEach(tile => {
                     guess.push({ letter: tile.getAttribute('data'), color: 'gray-overlay' })
                 })
+
+                console.log(guess)
 
                 guess.forEach((guess, index) => {
                     if (guess.letter === answer[index]) {

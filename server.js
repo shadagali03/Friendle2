@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const app = express()
 app.use(express.static('./public'))
-app.use(express.text())
+// app.use(express.text())
 app.use(express.json())
 app.listen(3000)
 //app.use(cors())
@@ -16,8 +16,9 @@ const paths = new Map()
 
 app.post('/generateurl', async (req, res) => {
     const path = (Math.random() + 1).toString(36).substring(7)
-    paths.set(path, req.body)
-    res.send(path)
+    paths.set(path, req.body.word)
+    console.log(req.body.customWord)
+    res.send(JSON.stringify({path, customWord: req.body.customWord}))
 })
 
 app.get("/paths/:path", async (req, res) => {
