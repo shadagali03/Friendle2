@@ -235,26 +235,24 @@
                                 return
                             }
                         } 
-                        //console.log('entered')
-                            flipTile()
-                            if (answer == guess) {
-                                showMessage("Congratulations!")
+                        flipTile()
+                        if (answer == guess) {
+                            showMessage("Congratulations!")
+                            isGameOver = true
+                            copyToClipBoard()
+                            return
+                        } else {
+                            if (currentRow >= guessRows[0].length) {
+                                showMessage("Game Over")
                                 isGameOver = true
                                 copyToClipBoard()
                                 return
-                            } else {
-                                if (currentRow >= guessRows[0].length) {
-                                    console.log(currentRow)
-                                    showMessage("Game Over")
-                                    isGameOver = true
-                                    copyToClipBoard()
-                                    return
-                                }
+                            }
 
-                                if (currentRow < guessRows[0].length) {
-                                    currentRow++
-                                    currentTile = 0
-                                }
+                            if (currentRow < guessRows[0].length) {
+                                currentRow++
+                                currentTile = 0
+                            }
                         }
                     }
                 }
