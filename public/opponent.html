@@ -1,336 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Friendle</title>
 
-        <!--CSS Styling--> 
-        <style>
-            * {
-                color: #181515;
-                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, Helvetica, sans-serif;
-            }
-            
-            body {
-                background-color: #f9f9ff;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendle</title>
 
-            .title-container {
-                text-align: center;
-                width: 510px;
-                border-bottom: solid 1px #3a3a3c;
-            }
+    <!--CSS Styling-->
+    <style>
+        * {
+            color: #181515;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, Helvetica, sans-serif;
+        }
 
-            .game-container {
-                height: 90vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-            }
+        body {
+            background-color: #f9f9ff;
+        }
 
-            .title-container {
-                width: 330px;
-                margin-bottom: 30px;
-            }
+        .title-container {
+            text-align: center;
+            width: 510px;
+            border-bottom: solid 1px #3a3a3c;
+        }
 
-            .key-container {
-                width: 510px;
-                display: flex;
-                flex-wrap: wrap;
-            }
+        .game-container {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-            .key-container button {
-                width: 43px;
-                height: 58px;
-                border-radius: 4px;
-                border: none;
-                margin: 4px;
-                color: #f9f9ff;
-            }
+        .title-container {
+            width: 330px;
+            margin-bottom: 30px;
+        }
 
-            .key-container button:nth-child(11) {
-                margin-left: 30px;
-            }
+        .key-container {
+            width: 510px;
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-            .key-container button:nth-child(20),
-            .key-container button:nth-child(28) {
-                width: 68px;
-            }
+        .key-container button {
+            width: 43px;
+            height: 58px;
+            border-radius: 4px;
+            border: none;
+            margin: 4px;
+            color: #f9f9ff;
+        }
 
-            .tile-container div {
-                display: flex;
-            }
+        .key-container button:nth-child(11) {
+            margin-left: 30px;
+        }
 
-            .tile-container .tile {
-                width: 62px;
-                height: 62px;
-                border: 2px solid;
-                box-sizing: border-box;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 2px;
-                font-size: 25px;
-            }
+        .key-container button:nth-child(20),
+        .key-container button:nth-child(28) {
+            width: 68px;
+        }
 
-            .message-container p {
-                background-color: #818384;
-                border-radius: 10px;
-                padding: 10px;
-                margin: 0;
-            }
+        .tile-container div {
+            display: flex;
+        }
 
-            .gray-overlay {
-                background-color: #39393a;
-                color: #f9f9ff;
-                border: none;
-            }
+        .tile-container .tile {
+            width: 62px;
+            height: 62px;
+            border: 2px solid;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2px;
+            font-size: 25px;
+        }
 
-            .yellow-overlay {
-                background-color: hsla(54, 96%, 51%, 0.856);
-                border: none;
-                color: #f9f9ff;
-            }
+        .message-container p {
+            background-color: #818384;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 0;
+        }
 
-            .green-overlay {
-                background-color: #066b03;
-                border: none;
-                color: #f9f9ff;
-            }
-        </style>
-    </head>
+        .gray-overlay {
+            background-color: #39393a;
+            color: #f9f9ff;
+            border: none;
+        }
 
-    <body>
-        <div class="game-container">
-            <div class="title-container">
-                <h1>Friendle</h1>
-            </div>
+        .yellow-overlay {
+            background-color: hsla(54, 96%, 51%, 0.856);
+            border: none;
+            color: #f9f9ff;
+        }
 
-            <div class="message-container"></div>
-            <div class="tile-container"></div>
-            <div class="key-container"></div>
+        .green-overlay {
+            background-color: #066b03;
+            border: none;
+            color: #f9f9ff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="title-container">
+            <h1>Friendle</h1>
         </div>
-        <!--Scripting-->
-        <script>
-            // Gets the query based items
-            const tileDisplay = document.querySelector('.tile-container')
-            const keyBoard = document.querySelector('.key-container')
-            const messageDisplay = document.querySelector('.message-container')
 
-            // answer that will be replaced by backend
-            const answer = "$$REPLACEANSWER$$".toUpperCase()
-            //const customWord = (new URLSearchParams(window.location.search)).customWord
-            const queryString = new URLSearchParams(window.location.search)
-            customWord = JSON.parse(queryString.get('customWord'))
+        <div class="message-container"></div>
+        <div class="tile-container"></div>
+        <div class="key-container"></div>
+    </div>
+    <!--Scripting-->
+    <script>
+        // Gets the query based items
+        const tileDisplay = document.querySelector('.tile-container')
+        const keyBoard = document.querySelector('.key-container')
+        const messageDisplay = document.querySelector('.message-container')
 
-            // Generate List for keys
-            var keyString = "QWERTYUIOPASDFGHJKL"
-            const keys = keyString.split('')
-            keys.push("ENTER")
-            keys.push.apply(keys, "ZXCVBNM".split(''))
-            keys.push("<<")
+        // answer that will be replaced by backend
+        const answer = "$$REPLACEANSWER$$".toUpperCase()
+        //const customWord = (new URLSearchParams(window.location.search)).customWord
+        const queryString = new URLSearchParams(window.location.search)
+        customWord = JSON.parse(queryString.get('customWord'))
+
+        // Generate List for keys
+        var keyString = "QWERTYUIOPASDFGHJKL"
+        const keys = keyString.split('')
+        keys.push("ENTER")
+        keys.push.apply(keys, "ZXCVBNM".split(''))
+        keys.push("<<")
 
 
-            // Generates array that will later be compared
-            const createGuessRows = (friendleAnswer) => {
-                let outerArray = []
-                for (let i = 0; i < 6; i++) {
-                    let innerArray = []
-                    for (let j = 0; j < friendleAnswer.length; j++) {
-                        innerArray.push('')
-                    }
-                    outerArray.push(innerArray)
+        // Generates array that will later be compared
+        const createGuessRows = (friendleAnswer) => {
+            let outerArray = []
+            for (let i = 0; i < 6; i++) {
+                let innerArray = []
+                for (let j = 0; j < friendleAnswer.length; j++) {
+                    innerArray.push('')
                 }
-                return outerArray
+                outerArray.push(innerArray)
+            }
+            return outerArray
+        }
+
+        // Intitializes global variables used throughout game
+        const guessRows = createGuessRows(answer)
+        let currentRow = 0
+        let currentTile = 0
+        let isGameOver = false
+
+        // Creates div for tile and keyboard attributes
+        guessRows.forEach((guessRow, guessRowIndex) => {
+            const rowElement = document.createElement('div')
+            rowElement.setAttribute('id', 'guessRow-' + guessRowIndex)
+            guessRow.forEach((guess, guessIndex) => {
+                const tileElement = document.createElement('div')
+                tileElement.setAttribute('id', 'guessRow' + guessRowIndex + '-tile-' + guessIndex)
+                tileElement.classList.add('tile')
+                rowElement.append(tileElement)
+            })
+            tileDisplay.append(rowElement)
+        })
+
+        keys.forEach(key => {
+            const buttonElement = document.createElement('button')
+            buttonElement.textContent = key
+            buttonElement.setAttribute('id', key)
+            buttonElement.addEventListener('click', () => handleClick(key))
+            keyBoard.append(buttonElement)
+        })
+
+        // Handles general key input
+        const handleClick = (key) => {
+            if ((key === '<<' || key.toUpperCase() === "BACKSPACE") && !isGameOver) {
+                deleteLetter()
+                return
             }
 
-            // Intitializes global variables used throughout game
-            const guessRows = createGuessRows(answer)
-            let currentRow = 0
-            let currentTile = 0
-            let isGameOver = false
-
-            // Creates div for tile and keyboard attributes
-            guessRows.forEach((guessRow, guessRowIndex) => {
-                const rowElement = document.createElement('div')
-                rowElement.setAttribute('id', 'guessRow-' + guessRowIndex)
-                guessRow.forEach((guess, guessIndex) => {
-                    const tileElement = document.createElement('div')
-                    tileElement.setAttribute('id', 'guessRow' + guessRowIndex + '-tile-' + guessIndex)
-                    tileElement.classList.add('tile')
-                    rowElement.append(tileElement)
-                })
-                tileDisplay.append(rowElement)
-            })
-
-            keys.forEach(key => {
-                const buttonElement = document.createElement('button')
-                buttonElement.textContent = key
-                buttonElement.setAttribute('id', key)
-                buttonElement.addEventListener('click', () => handleClick(key))
-                keyBoard.append(buttonElement)
-            })
-
-            // Handles general key input
-            const handleClick = (key) => {
-                if ((key === '<<' || key.toUpperCase() === "BACKSPACE") && !isGameOver) {
-                    deleteLetter()
-                    return
-                }
-
-                if (key.toUpperCase() === 'ENTER' && !isGameOver) {
-                    checkRow()
-                    return
-                }
-                addLetter(key)
+            if (key.toUpperCase() === 'ENTER' && !isGameOver) {
+                checkRow()
+                return
             }
+            addLetter(key)
+        }
 
-            // Handles keyboard input
-            document.addEventListener('keydown', (e) => {
-                if ((e.key.length == 1 && e.key.match(/[a-z]/i)) || e.key == "Enter" || e.key == "Backspace") {
-                    handleClick(e.key.toUpperCase())
-                }
-            })
+        // Handles keyboard input
+        document.addEventListener('keydown', (e) => {
+            if ((e.key.length == 1 && e.key.match(/[a-z]/i)) || e.key == "Enter" || e.key == "Backspace") {
+                handleClick(e.key.toUpperCase())
+            }
+        })
 
-            // Adds letter using the guessRow array
-            const addLetter = (letter) => {
+        // Adds letter using the guessRow array
+        const addLetter = (letter) => {
+            const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
+            if (tile) {
+                tile.textContent = letter
+                tile.setAttribute('data', letter)
+                guessRows[currentRow][currentTile] = letter
+                currentTile++
+            }
+        }
+
+        const deleteLetter = () => {
+            if (currentTile > 0) {
+                currentTile--
                 const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
-                if (tile) {
-                    tile.textContent = letter
-                    tile.setAttribute('data', letter)
-                    guessRows[currentRow][currentTile] = letter
-                    currentTile++
-                }
+                tile.textContent = ''
+                guessRows[currentRow][currentTile] = ''
+                tile.setAttribute('data', '')
             }
+        }
 
-            const deleteLetter = () => {
-                if (currentTile > 0) {
-                    currentTile--
-                    const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
-                    tile.textContent = ''
-                    guessRows[currentRow][currentTile] = ''
-                    tile.setAttribute('data', '')
-                }
-            }
-
-            // Checks to see if word is valid
-            const checkRow = async () => {
+        // Checks to see if word is valid
+        const checkRow = async () => {
+            if (currentTile > guessRows[0].length - 1) {
+                const guess = guessRows[currentRow].join('')
                 if (currentTile > guessRows[0].length - 1) {
-                    const guess = guessRows[currentRow].join('')
-                    if (currentTile > guessRows[0].length - 1) {
-                        if (!customWord) {
-                            const json = await (await fetch(`http://localhost:3000/check/?word=${guess}`)).json()
-                            if (json == 'Entry word not found') {
-                                showMessage('word not in list')
-                                for (let i = guessRows[0].length; i > 0; i--) {
-                                    currentTile--
-                                    const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
-                                    tile.textContent = ''
-                                    guessRows[currentRow][currentTile] = ''
-                                    tile.setAttribute('data', '')
-                                }
-                                return
+                    if (!customWord) {
+                        const json = await (await fetch(`http://localhost:3000/check/?word=${guess}`)).json()
+                        if (json == 'Entry word not found') {
+                            showMessage('word not in list')
+                            for (let i = guessRows[0].length; i > 0; i--) {
+                                currentTile--
+                                const tile = document.getElementById('guessRow' + currentRow + '-tile-' + currentTile)
+                                tile.textContent = ''
+                                guessRows[currentRow][currentTile] = ''
+                                tile.setAttribute('data', '')
                             }
-                        } 
-                        flipTile()
-                        if (answer == guess) {
-                            showMessage("Congratulations!")
+                            return
+                        }
+                    }
+                    flipTile()
+                    if (answer == guess) {
+                        showMessage("Congratulations!")
+                        isGameOver = true
+                        copyToClipBoard()
+                        return
+                    } else {
+                        if (currentRow >= guessRows[0].length) {
+                            showMessage("Game Over")
                             isGameOver = true
                             copyToClipBoard()
                             return
-                        } else {
-                            if (currentRow >= guessRows[0].length) {
-                                showMessage("Game Over")
-                                isGameOver = true
-                                copyToClipBoard()
-                                return
-                            }
+                        }
 
-                            if (currentRow < guessRows[0].length) {
-                                currentRow++
-                                currentTile = 0
-                            }
+                        if (currentRow < guessRows[0].length) {
+                            currentRow++
+                            currentTile = 0
                         }
                     }
                 }
             }
+        }
 
-            // Creates a message that will show on screeen with desired message
-            const showMessage = (message) => {
-                const messageElement = document.createElement('p')
-                messageElement.textContent = message
-                messageDisplay.append(messageElement)
-                setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
-            }
+        // Creates a message that will show on screeen with desired message
+        const showMessage = (message) => {
+            const messageElement = document.createElement('p')
+            messageElement.textContent = message
+            messageDisplay.append(messageElement)
+            setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
+        }
 
-            const flipTile = () => {
-                const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
-                let copyAnswer = answer
-                const guess = []
+        const flipTile = () => {
+            const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
+            let copyAnswer = answer
+            const guess = []
 
-                rowTiles.forEach(tile => {
-                    guess.push({ letter: tile.getAttribute('data'), color: 'gray-overlay' })
-                })
+            rowTiles.forEach(tile => {
+                guess.push({ letter: tile.getAttribute('data'), color: 'gray-overlay' })
+            })
 
-                console.log(guess)
+            console.log(guess)
 
-                guess.forEach((guess, index) => {
-                    if (guess.letter === answer[index]) {
-                        guess.color = 'green-overlay'
-                        copyAnswer = copyAnswer.replace(guess.letter, '')
-                    }
-                })
-
-                guess.forEach(guess => {
-                    if (copyAnswer.includes(guess.letter)) {
-                        guess.color = 'yellow-overlay'
-                        copyAnswer = copyAnswer.replace(guess.letter, '')
-                    }
-                })
-
-                rowTiles.forEach((tile, index) => {
-                    tile.classList.add(guess[index].color)
-                    addColorToKey(guess[index].letter, guess[index].color)
-                })
-            }
-
-            const addColorToKey = (keyLetter, color) => {
-                const key = document.getElementById(keyLetter)
-                key.classList.add(color)
-            }
-
-            const copyToClipBoard = () => {
-                answerRow = currentRow + 1
-                var greenSqaure = String.fromCodePoint(0x1F7E9)
-                var yellowSqaure = String.fromCodePoint(0x1F7E8)
-                var blackSqaure = String.fromCodePoint(0x1F7E7)
-
-                let resultText = 'Congratulations you guessed the word!!!\n\nFriendle: ' + answerRow + '/6\n\n'
-                if (currentRow == guessRows.length && guessRows[5] != answer) {
-                    resultText = 'Whoops you missed the word!\n\nFriendle: X/6\n\n'
+            guess.forEach((guess, index) => {
+                if (guess.letter === answer[index]) {
+                    guess.color = 'green-overlay'
+                    copyAnswer = copyAnswer.replace(guess.letter, '')
                 }
+            })
 
-                for (let i = 0; i < answerRow; i++) {
-                    for (let j = 0; j < guessRows[0].length; j++) {
-                        if (guessRows[i][j] == answer[j]) {
-                            resultText += greenSqaure
-                        } else if (answer.includes(guessRows[i][j])) {
-                            resultText += yellowSqaure
-                        } else {
-                            resultText += blackSqaure
-                        }
-                    }
-                    if (i == answerRow - 1) {
-                        break
-                    }
-                    resultText += '\n'
+            guess.forEach(guess => {
+                if (copyAnswer.includes(guess.letter)) {
+                    guess.color = 'yellow-overlay'
+                    copyAnswer = copyAnswer.replace(guess.letter, '')
                 }
-                navigator.clipboard.writeText(resultText).then(() => alert(resultText + '\nScore copied to clipboard!'))
-                return
+            })
+
+            rowTiles.forEach((tile, index) => {
+                tile.classList.add(guess[index].color)
+                addColorToKey(guess[index].letter, guess[index].color)
+            })
+        }
+
+        const addColorToKey = (keyLetter, color) => {
+            const key = document.getElementById(keyLetter)
+            key.classList.add(color)
+        }
+
+        const copyToClipBoard = () => {
+            answerRow = currentRow + 1
+            var greenSqaure = String.fromCodePoint(0x1F7E9)
+            var yellowSqaure = String.fromCodePoint(0x1F7E8)
+            var blackSqaure = String.fromCodePoint(0x1F7E7)
+
+            let resultText = 'Congratulations you guessed the word!!!\n\nFriendle: ' + answerRow + '/6\n\n'
+            if (currentRow == guessRows.length && guessRows[5] != answer) {
+                resultText = 'Whoops you missed the word!\n\nFriendle: X/6\n\n'
             }
-        </script>
-    </body>
+
+            for (let i = 0; i < answerRow; i++) {
+                for (let j = 0; j < guessRows[0].length; j++) {
+                    if (guessRows[i][j] == answer[j]) {
+                        resultText += greenSqaure
+                    } else if (answer.includes(guessRows[i][j])) {
+                        resultText += yellowSqaure
+                    } else {
+                        resultText += blackSqaure
+                    }
+                }
+                if (i == answerRow - 1) {
+                    break
+                }
+                resultText += '\n'
+            }
+            navigator.clipboard.writeText(resultText).then(() => alert(resultText + '\nScore copied to clipboard!'))
+            return
+        }
+    </script>
+</body>
+
 </html>
