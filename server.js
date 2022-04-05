@@ -3,28 +3,22 @@ import path from 'path'
 import fetch from 'node-fetch'
 import fs from 'fs/promises';
 import axios from 'axios'
-//import cors from 'cors'
 
 const app = express()
 app.use(express.static('./public'))
-// app.use(express.text())
 app.use(express.json())
 app.listen(3000)
-//app.use(cors())
 
 const paths = new Map()
 
 app.post('/generateurl', async (req, res) => {
     const path = (Math.random() + 1).toString(36).substring(7)
     paths.set(path, req.body.word)
-    console.log(req.body.customWord)
-    res.send(JSON.stringify({path, customWord: req.body.customWord}))
+    res.send(JSON.stringify({ path, customWord: req.body.customWord }))
 })
 
 app.get("/paths/:path", async (req, res) => {
-    // console.log(req.params.path)
     try {
-        // res.sendfile(path.join(path.resolve(), './public/opponent.html'));
         let htmlFile = await fs.readFile('./public/opponent.html', 'utf8')
         htmlFile = htmlFile.replace("$$REPLACEANSWER$$", paths.get(req.params.path))
         res.send(htmlFile)
@@ -32,9 +26,6 @@ app.get("/paths/:path", async (req, res) => {
     catch (err) {
         console.log("error")
     }
-    // console.log(path.join(path.resolve(), './public/opponent.html'))
-    // res.send(await fs.readfile('./public/opponent.html', 'utf8'))
-    // res.send(paths.get(req.params.path))
 })
 
 
@@ -51,7 +42,6 @@ app.get('/check', (req, res) => {
     };
 
     axios.request(options).then((response) => {
-        console.log(response.data.result_msg)
         res.json(response.data.result_msg)
     }).catch((error) => {
         console.error(error)
